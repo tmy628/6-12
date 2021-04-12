@@ -7,18 +7,15 @@ $(function(){
     $.ajax({
       url: "http://api.openweathermap.org/data/2.5/weather?q=" + $('#cityname').val() + "&units=metric&appid=" + API_KEY,
       dataType : 'jsonp',
-    })
+    }).done(function (data){
+      //通信成功
+    }).fail(function (data) {
+      //通信失敗
+    });
 
   });
 });
 
-// $.ajax()は、Ajaxを実装するメソッド
-// オプション（パラメータ）も設定できる
-// 今回は、urlとdataTypeの2つを設定している
-// url:では、APIにリクエストするURLを指定する
-
-// 今回のURLは、http://api.openweathermap.org/data/2.5/weather?q=tokyo&units=metric&appid="取得したAPI"
-// $('#cityname').val()で#citynameの値を受け取り、URLを結合させている（val()は、HTMLのvalue属性を取得するメソッド）
-
-// dataTypeでは、レスポンスとして取得したいデータの型を指定する
-// 今回はJSONで受け取りたいので、 dataType : 'jsonp',と記述する
+// .done()は通信に成功した場合、.fail()は失敗した場合に記述するメソッド
+// 「通信に成功する」とは、今回はWeb APIが正常に呼び出せたことを意味している
+// どちらのメソッドでも(data)を指定しているが、その引数内に取得した結果が入る（dataは任意の変数名）
